@@ -144,7 +144,7 @@ function slideTimer() {
   }, 500)
 }
 
-    // event listeners
+    // listeners functions
 
 // touch events
 let startX;
@@ -173,7 +173,17 @@ function sliderWheel(e) {
       actionPrev()
     }
 }
-
+// Keyboard events
+function sliderKeyboard(e) {
+  if (e.keyCode === 37) {
+    actionPrev()
+  }
+  if (e.keyCode === 39) {
+    actionNext()
+  }
+  console.log(e.keyCode);
+}
+    // Event Listeners
 // buttons
 btnPrev.addEventListener("click", actionPrev);
 btnNext.addEventListener("click", actionNext);
@@ -182,6 +192,8 @@ document.addEventListener("touchstart", sliderTouchStart);
 document.addEventListener("touchend", sliderTouchEnd);
 // mouse wheel
 document.body.addEventListener("wheel", sliderWheel)
+// keyboard
+document.addEventListener("keydown", sliderKeyboard)
 
 
 // initial state
