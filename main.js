@@ -1,5 +1,7 @@
 const btnPrev = document.querySelector(".btn-prev");
 const btnNext = document.querySelector(".btn-next");
+
+// .text-main .personal-info .img-person
 const animable = document.querySelectorAll(".animable")
 
 const changeDom = {
@@ -12,14 +14,15 @@ const changeDom = {
 // for setTimeout (delay)
 const animTime1 = 200;
 const animTime2 = 100;
+
 let canSlide = true;
+let actual = 0; // for testimonialList index
+const testimonialList = [];
 
-let actual = 0;
-const TestimonialList = [];
-
+// slide functions
 function actionPrev() {
   if (canSlide) {
-    if (actual >= TestimonialList.length - 1) {
+    if (actual >= testimonialList.length - 1) {
       actual = 0;
     } else {
       actual++;
@@ -32,7 +35,7 @@ function actionPrev() {
 function actionNext() {
   if (canSlide) {
     if (actual === 0) {
-      actual = TestimonialList.length - 1;
+      actual = testimonialList.length - 1;
     } else {
       actual--;
     }
@@ -42,16 +45,15 @@ function actionNext() {
   }
 }
 
-
+// change dom info from the *actual* array index
 function changeDomFunction() {
-  changeDom.name.textContent = TestimonialList[actual].name;
-  changeDom.job.textContent = TestimonialList[actual].job;
-  changeDom.text.textContent = TestimonialList[actual].text;
-  changeDom.img.src = TestimonialList[actual].imgSrc;
+  changeDom.name.textContent = testimonialList[actual].name;
+  changeDom.job.textContent = testimonialList[actual].job;
+  changeDom.text.textContent = testimonialList[actual].text;
+  changeDom.img.src = testimonialList[actual].imgSrc;
 }
-btnPrev.addEventListener("click", actionPrev);
-btnNext.addEventListener("click", actionNext);
 
+// create new tesstimonial
 function NewTestimonial(name, job, imgSrc, text) {
   this.name = name;
   this.job = job;
@@ -66,7 +68,7 @@ function NewTestimonial(name, job, imgSrc, text) {
   };
 }
 
-// create testimonials
+    // create testimonials
 
 // name
 // job
@@ -88,15 +90,11 @@ const john = new NewTestimonial(
 );
 
 // add to array
-TestimonialList.push(tanya);
-TestimonialList.push(john);
+testimonialList.push(tanya);
+testimonialList.push(john);
 
-// initial state
-changeDomFunction();
 
-// document.body.addEventListener("touchmove", (e) => {
-//   console.log(e.touches[0]);
-// });
+// animation
 const animationSlide = (side, time1, time2) => {
   if (side === "left") {
 
@@ -138,32 +136,35 @@ const animationSlide = (side, time1, time2) => {
   }
 }
 
-// touch controls
-let startX;
-
-document.addEventListener("touchstart", function (event) {
-  startX = event.touches[0].clientX; // save the first touch
-});
-
-document.addEventListener("touchend", function (event) {
-  const endX = event.changedTouches[0].clientX; // Obtener la coordenada X del toque final
-  const touchLength = Math.round(startX) - Math.round(endX)
-  if (endX < startX && touchLength > 50 && canSlide) {  // touch to left
-    actionNext()
-  } else if (endX > startX && touchLength < -50 && canSlide) {   // touch to right
-    actionPrev()
-  }
-
-
-});
-
+// time for the next slide
 function slideTimer() {
   canSlide = false
   setTimeout(() => {
     canSlide = true
   }, 500)
 }
-document.body.addEventListener("wheel", (e) => {
+
+    // event listeners
+
+// touch events
+let startX;
+
+function sliderTouchStart(event) {
+  startX = event.touches[0].clientX; // save the first touch
+}
+
+function sliderTouchEnd (event) {
+  const endX = event.changedTouches[0].clientX;
+  const touchLength = Math.round(startX) - Math.round(endX)
+  if (endX < startX && touchLength > 50 && canSlide) {  // touch to left
+    actionNext()
+  } else if (endX > startX && touchLength < -50 && canSlide) {   // touch to right
+    actionPrev()
+  }
+}
+
+// mouse wheel events
+function sliderWheel(e) {
     const posX = e.deltaX
 
     if (posX > 10 && canSlide) {
@@ -171,5 +172,17 @@ document.body.addEventListener("wheel", (e) => {
     } else if (posX < -10 && canSlide) {
       actionPrev()
     }
+}
 
-})
+// buttons
+btnPrev.addEventListener("click", actionPrev);
+btnNext.addEventListener("click", actionNext);
+// touch controls
+document.addEventListener("touchstart", sliderTouchStart);
+document.addEventListener("touchend", sliderTouchEnd);
+// mouse wheel
+document.body.addEventListener("wheel", sliderWheel)
+
+
+// initial state
+changeDomFunction();
