@@ -1,0 +1,248 @@
+/* * {
+    outline: 2px solid red;
+} */
+:root {
+    --main-font: 'Inter', sans-serif;
+    --dark-blue: hsl(240, 38%, 20%);
+    --grayish-blue: hsl(240, 18%, 77%);
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+body {
+    display: flex;
+    align-items: center;
+    overflow-x: hidden;
+
+    color: var(--dark-blue);
+    font-size: 3.2rem;
+    font-family: var(--main-font);
+    margin: 0;
+    padding: 0 5%;
+    max-width: 100vw;
+    min-height: 100vh;
+    background-image: url("./images/pattern-curve.svg");
+    background-repeat: no-repeat;
+    background-position-x: left;
+    background-position-y: bottom;
+    background-size: min(100%, 550px);
+}
+main {
+    display: grid;
+    margin: 0 auto;
+    /* overflow: hidden; */
+
+    grid-template-columns: repeat(2, minmax(300px, 50%));;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+}
+section {
+    display: block;
+    width: 500px;
+    height: 500px;
+}
+button {
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+    border-radius: 50%;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+}
+button:hover {
+    cursor: pointer;
+}
+button:active {
+    scale: 1.2;
+}
+/* image section */
+.img-div {
+    width: 120%;
+    margin-top: 10px;
+    background-image: url("./images/pattern-bg.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.img-container {
+    display: flex;
+    width: 600px;
+    height: 600px;
+}
+.img {
+    position: relative;
+}
+.img-person  {
+    width: 80%;
+    box-shadow: 8px 9px 20px 1px #0000001a;
+}
+.btn-div {
+    position: absolute;
+    display: flex;
+    border-radius: 20px;
+    box-shadow: 0px 3px 4px 1px #0000001a;
+    bottom: -22px;
+    left: 10%;
+    padding: 5px;
+    background-color: #ffffff;
+    column-gap: 20px;
+    padding: 12px 10px;
+}
+
+/* text section */
+.text-container {
+    display: flex;
+    align-items: center;
+    /* margin: -60px; */
+}
+.text-main-container {
+    background-image: url("./images/pattern-quotes.svg");
+    background-repeat: no-repeat;
+    background-position-x: 100px;
+    height: 330px;
+    /* margin-top: 60px; */
+
+}
+.text-main {
+    font-weight: 300;
+    margin-top: 90px;
+    margin-right: -130px;
+    position: relative;
+    z-index: 10;
+}
+
+.personal-info {
+    font-size: 1.6rem;
+}
+.text-name {
+    font-weight: 700;
+    display: inline;
+}
+.text-job {
+    color: var(--grayish-blue);
+    font-weight: 500;
+}
+
+
+
+/* mobile/tablet */
+@media (max-width: 768px) {
+    body {
+        font-size: 2rem;
+        text-align: center;
+    }
+    main {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        align-content: center;
+    }
+    section {
+        width: auto;
+        height: auto;
+    }
+    /* image section */
+    .img-div {
+        height: 100vw;
+        max-height: 450px;
+        background-position: center;
+    }
+    .img-container {
+        width: auto;
+        height: auto;
+        grid-row: 1 / 2;
+    }
+    .img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .img-person {
+        width: 70%;
+    }
+    .btn-div {
+        left: auto;
+    }
+
+    /* text section */
+    .text-main {
+        margin-right: 0;
+    }
+    .text-container {
+        grid-row: 2 / 3;
+    }
+    .text-main-container {
+        background-position: center;
+        background-position-y: inherit;
+        background-size: 80px;
+    }
+
+    .personal-info {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 30px;
+    }
+    .text-name {
+        display: inline;
+        margin: 0;
+    }
+    .text-job {
+        font-size: 1.6rem;
+        margin-left: 10px;
+    }
+
+}
+
+/* mobile */
+@media (max-width: 375px) {
+    .text-container {
+        overflow: auto;
+    }
+    .personal-info {
+        flex-direction: column;
+        margin: 0;
+        margin-top: 20px;
+    }
+    .text-main {
+        margin-bottom: 0;
+        margin-top: 50px;
+    }
+}
+
+/* for text contrast  */
+@media (min-width: 675px) and  (max-width: 1000px) {
+    .text-main {
+        text-shadow: 3px 3px 1px white;
+    }
+}
+
+/* animation */
+.text-main,
+.personal-info,
+.img-person {
+    translate: 0;
+    transition: translate .2s, opacity .2s;
+}
+
+.to-left {
+    translate: -300px;
+    opacity: 0;
+}
+.to-right {
+    translate: 300px;
+    opacity: 0;
+}
+.from-left {
+    translate: -300px;
+    opacity: 0;
+}
+.from-right {
+    translate: 300px;
+    opacity: 0;
+}
