@@ -30,8 +30,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://github.com/WolfMozart8/coding-bootcamp-testimonial)
-- Live Site URL: [Add live site URL here](https://wolfmozart8.github.io/coding-bootcamp-testimonial)
+- Solution URL: [GitHub repo](https://github.com/WolfMozart8/coding-bootcamp-testimonial)
+- Live Site URL: [GitHub Pages](https://wolfmozart8.github.io/coding-bootcamp-testimonial)
 
 ## My process
 
